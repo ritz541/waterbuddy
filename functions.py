@@ -15,7 +15,7 @@ def user_registration():
     })
     
     if check_user:
-        print(f"{user_name} already exists!")
+        print(f"{user_name} username already exists!")
         return
     
     password = input("Enter password: ")
@@ -42,19 +42,6 @@ def add_to_database(username, password):
     except Exception as e:
         print(f"Error adding to database: {e}")
         return False
-
-    
-def add_to_database(username, password):
-    try:
-        collection.insert_one({
-            "username": username,
-            "password": password
-        })
-        return True
-        
-    except Exception as e:
-        print("Error adding to database: ", e)
-        return False
     
 def user_login():
     user_name = input("Enter your username: ")
@@ -69,6 +56,7 @@ def user_login():
             
             if bcrypt.checkpw(password.encode('utf-8'), check_user["password"]):
                 print("Login successful!")
+                return True
             else:
                 print("Incorrect password!")
         else:
@@ -76,3 +64,4 @@ def user_login():
     
     except Exception as e:
         print(f"Error occurred: {e}")
+        
